@@ -1,0 +1,83 @@
+PM-AJAY ENUMERATOR APP - STRUCTURE OVERVIEW
+============================================
+
+TECH STACK
+----------
+- Next.js 13 (App Router)
+- TypeScript
+- Tailwind CSS
+- shadcn/ui components
+- React Context for state management
+
+ROUTES
+------
+/enumerator/login            - Login page for enumerators
+/enumerator/dashboard        - Main worklist (household list with filters)
+/enumerator/households/new   - 4-step form for manual household entry
+/enumerator/households/[id]  - View/edit household details + verification
+/enumerator/paper-upload     - Paper-to-digital entry simulation
+/enumerator/facilities       - List of facilities
+/enumerator/facilities/[id]  - View/edit facility details
+/enumerator/followups        - Pending follow-up cases
+/enumerator/settings         - Enumerator profile and logout
+
+KEY FEATURES
+------------
+1. Three Data Entry Paths:
+   - AI Draft verification (simulated with dummy data)
+   - Manual new household entry (house-to-house survey)
+   - Paper-to-digital entry (office data entry from paper forms)
+
+2. Mobile-First Design:
+   - Responsive layout that works on small phones
+   - Bottom navigation bar on mobile
+   - Touch-friendly tap targets
+   - Scales nicely on desktop with centered content
+
+3. State Management:
+   - EnumeratorContext provides global state
+   - In-memory storage (resets on page refresh)
+   - Dummy data provided in lib/dummy-data.ts
+   - No backend or API calls
+
+4. Layout Components:
+   - TopBar: App name, online/offline indicator, enumerator name
+   - BottomNav: 5-icon navigation (Dashboard, New, Facilities, Follow-ups, Settings)
+   - EnumeratorLayout: Wraps all authenticated pages
+
+5. Reusable Components:
+   - StatusBadge: Draft, Verified, Pending Docs, Not Eligible
+   - SourceBadge: AI Draft, Manual, Paper
+   - RiskBadge: Green, Yellow, Red indicators
+   - HouseholdCard: Displays household summary in lists
+   - FacilityCard: Displays facility summary in lists
+
+DATA TYPES
+----------
+- Enumerator: User info (id, name, block, district)
+- Household: Full beneficiary/household data with verification
+- Facility: Infrastructure data (schools, PHCs, roads)
+- FollowUp: Pending action items
+
+WORKFLOW
+--------
+1. Enumerator logs in with ID and name
+2. Views worklist of households on dashboard
+3. Can filter by status (Draft/Verified/Pending Docs) and source (AI/Manual/Paper)
+4. Three ways to add/verify households:
+   a. Click existing household to verify AI draft
+   b. Click "New Household" for manual entry
+   c. Use "Paper Upload" to enter data from paper forms
+5. Can view and update facility information
+6. Can manage follow-up cases
+7. Can view profile and log out
+
+NO BACKEND
+----------
+- All data is stored in React state (EnumeratorContext)
+- Dummy data is pre-loaded from lib/dummy-data.ts
+- Changes persist only during the session
+- No authentication, database, or API calls
+- File uploads are simulated (no actual upload logic)
+
+This is a complete, working UI prototype ready to be plugged into a larger system.
